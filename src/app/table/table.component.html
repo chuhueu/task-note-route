@@ -1,0 +1,44 @@
+<div class="title">
+  <h3 class="overdue">Overdue</h3>
+  <a routerLink="/add">Add Note</a>
+</div>
+<table class="table">
+  <thead class="thread">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Due On</th>
+      <th>Status</th>
+      <th>Expiring In</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let note of notes; let i = index">
+      <td class="styleTitle">{{ note.title }}</td>
+      <td>{{ note.desc }}</td>
+      <td>10/02/22</td>
+      <td>
+        <div class="styleOverdue text-center">OverDue</div>
+        <div class="text-center">3 days</div>
+      </td>
+      <td>3 days</td>
+      <td>
+        <div class="dropdown">
+          <button
+            class="buttonDrop dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            <span class="glyphicon glyphicon-option-horizontal"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/edit/{{ i }}">Edit</a></li>
+            <li><a routerLink="#">Share</a></li>
+            <li><a (click)="onHandleDelete(note)">Delete</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
