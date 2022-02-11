@@ -26,6 +26,7 @@ export class TableComponent implements OnInit {
     this.modalService.open(content);
   }
   onHandleDelete(note: string) {
+    //service delete
     this.notesService.deleteNote(note);
   }
 }

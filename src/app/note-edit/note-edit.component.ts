@@ -40,6 +40,7 @@ export class NoteEditComponent implements OnInit {
       this.saveNote = false;
     }, 3000);
     this.allowEditNote = false;
+    //service update
     this.notesService.updateNote(this.index, this.info);
   }
 }

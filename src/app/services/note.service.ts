@@ -1,3 +1,12 @@
+export interface NoteTest {
+  title: string;
+  desc: string;
+  date: {
+    year: number;
+    month: number;
+    day: number;
+  };
+}
 export class Note {
   public title: string;
   public desc: string;
@@ -17,8 +26,6 @@ export class Note {
   }
 }
 export class NotesService {
-  // notes: { title: string; desc: string }[] =
-  //   JSON.parse(localStorage.getItem('notes')!) || [];
   notes: Note[] = JSON.parse(localStorage.getItem('notes')!) || [];
   addNote(
     title: string,
@@ -27,7 +34,7 @@ export class NotesService {
   ) {
     this.notes.push({ title: title, desc: desc, date: date });
     localStorage.setItem('notes', JSON.stringify(this.notes));
-    console.log(this.notes);
+    //console.log(this.notes);
   }
   deleteNote(note: string) {
     this.notes.forEach((value, index) => {

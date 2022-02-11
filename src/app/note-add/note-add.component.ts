@@ -32,6 +32,7 @@ export class NoteAddComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.addSuccess = false;
     }, 2000);
+    //service add
     this.notesService.addNote(this.title, this.desc, this.model);
     this.title = '';
     this.desc = '';
