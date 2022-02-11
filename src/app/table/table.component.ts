@@ -9,6 +9,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TableComponent implements OnInit {
   notes: Note[] = [];
+  test: string;
   constructor(
     private notesService: NotesService,
     config: NgbModalConfig,
@@ -20,6 +21,8 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.notes = this.notesService.notes;
+    this.test = this.notesService.test;
+    console.log(this.test);
   }
 
   open(content: any) {

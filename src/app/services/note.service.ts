@@ -27,6 +27,7 @@ export class Note {
 }
 export class NotesService {
   notes: Note[] = JSON.parse(localStorage.getItem('notes')!) || [];
+  test = 'hello';
   addNote(
     title: string,
     desc: string,
