@@ -1,18 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { Router } from '@angular/router';
-
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NotesService } from '../services/note.service';
 @Component({
   selector: 'app-note-add',
   templateUrl: './note-add.component.html',
   styleUrls: ['./note-add.component.css'],
 })
-export class NoteAddComponent implements OnInit {
+export class NoteAddComponent implements OnInit, OnChanges {
+  model: NgbDateStruct;
+  allowAddNote = false;
   addSuccess = false;
   title = '';
   desc = '';
-  notes: { title: string; desc: string }[] =
-    JSON.parse(localStorage.getItem('notes')!) || [];
-  constructor(private router: Router) {}
+
+  constructor(private router: Router, private notesService: NotesService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(changes);
+    // console.log('ngOnChanges are called');
+  }
 
   ngOnInit(): void {}
   onHandleAdd() {
@@ -20,13 +32,9 @@ export class NoteAddComponent implements OnInit {
     setTimeout(() => {
       this.addSuccess = false;
     }, 2000);
-    this.notes.push({
-      title: this.title,
-      desc: this.desc,
-    });
+    this.notesService.addNote(this.title, this.desc, this.model);
     this.title = '';
     this.desc = '';
-    localStorage.setItem('notes', JSON.stringify(this.notes));
   }
   onHandleBack() {
     this.router.navigate(['/']);

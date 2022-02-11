@@ -6,6 +6,8 @@ import { TableComponent } from './table/table.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NoteEditComponent } from './note-edit/note-edit.component';
 import { NoteAddComponent } from './note-add/note-add.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NotesService } from './services/note.service';
 
 const appRoutes: Routes = [
   { path: '', component: TableComponent },
@@ -20,8 +22,13 @@ const appRoutes: Routes = [
     NoteEditComponent,
     NoteAddComponent,
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
-  providers: [],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    NgbModule,
+  ],
+  providers: [NotesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

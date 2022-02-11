@@ -17,7 +17,7 @@
     <tr *ngFor="let note of notes; let i = index">
       <td class="styleTitle">{{ note.title }}</td>
       <td>{{ note.desc }}</td>
-      <td>10/02/22</td>
+      <td>{{ note.date.day }}/{{ note.date.month }}/{{ note.date.year }}</td>
       <td>
         <div class="styleOverdue text-center">OverDue</div>
         <div class="text-center">3 days</div>
@@ -35,10 +35,61 @@
           <ul class="dropdown-menu">
             <li><a routerLink="/edit/{{ i }}">Edit</a></li>
             <li><a routerLink="#">Share</a></li>
-            <li><a (click)="onHandleDelete(note)">Delete</a></li>
+            <li>
+              <a
+                style="cursor: pointer"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                >Delete</a
+              >
+            </li>
           </ul>
         </div>
       </td>
+      <div
+        class="modal"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">Are you sure?</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                (click)="onHandleDelete(note.title)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </tr>
   </tbody>
 </table>
