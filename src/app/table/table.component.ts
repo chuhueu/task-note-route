@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Note, NotesService } from '../services/note.service';
+import { NotesService, Table } from '../services/note.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-table',
@@ -8,8 +8,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbModalConfig, NgbModal],
 })
 export class TableComponent implements OnInit {
-  notes: Note[] = [];
-  test: string;
+  tables: Table[];
+  values: any[] = [];
   constructor(
     private notesService: NotesService,
     config: NgbModalConfig,
@@ -20,16 +20,21 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notes = this.notesService.notes;
-    this.test = this.notesService.test;
-    console.log(this.test);
+    this.tables = this.notesService.tables;
+    //create an array values contain tables.values
+    this.tables.forEach((table) => {
+      this.values.push(table.values);
+    });
+    //console.log(this.values);
   }
 
   open(content: any) {
     this.modalService.open(content);
   }
-  onHandleDelete(note: string) {
-    //service delete
-    this.notesService.deleteNote(note);
+  onHandleDelete(indexValue: number) {
+    // this.notesService.deleteNote(indexValue);
+    this.values.forEach((value) => {
+      value.splice(indexValue, 1);
+    });
   }
 }

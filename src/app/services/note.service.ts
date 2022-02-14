@@ -1,60 +1,53 @@
-export interface NoteTest {
+export interface Table {
   title: string;
-  desc: string;
-  date: {
-    year: number;
-    month: number;
-    day: number;
-  };
-}
-export class Note {
-  public title: string;
-  public desc: string;
-  public date: {
-    year: number;
-    month: number;
-    day: number;
-  };
-  constructor(
-    title: string,
-    desc: string,
-    date: { year: number; month: number; day: number }
-  ) {
-    this.title = title;
-    this.desc = desc;
-    this.date = date;
-  }
+  values: Array<string>;
 }
 export class NotesService {
-  notes: Note[] = JSON.parse(localStorage.getItem('notes')!) || [];
-  test = 'hello';
-  addNote(
-    title: string,
-    desc: string,
-    date: { year: number; month: number; day: number }
-  ) {
-    this.notes.push({ title: title, desc: desc, date: date });
-    localStorage.setItem('notes', JSON.stringify(this.notes));
-    //console.log(this.notes);
-  }
-  deleteNote(note: string) {
-    this.notes.forEach((value, index) => {
-      if (value.title === note) {
-        this.notes.splice(index, 1);
+  tables: Table[] = JSON.parse(localStorage.getItem('tables')!) || [
+    {
+      title: 'Title',
+      values: [],
+    },
+    {
+      title: 'Description',
+      values: [],
+    },
+    {
+      title: 'Date',
+      values: [],
+    },
+  ];
+  values: any[] = [];
+
+  addNote(title: string, desc: string, date: string) {
+    this.tables.forEach((table) => {
+      if (table.title === 'Title') {
+        table.values.push(title);
+      }
+      if (table.title === 'Description') {
+        table.values.push(desc);
+      }
+      if (table.title === 'Date') {
+        table.values.push(date);
       }
     });
-    localStorage.setItem('notes', JSON.stringify(this.notes));
-    //console.log('hello');
+    localStorage.setItem('tables', JSON.stringify(this.tables));
   }
-  updateNote(
-    index: number,
-    info: {
-      title: string;
-      desc: string;
-      date: { year: number; month: number; day: number };
-    }
-  ) {
-    this.notes.splice(index, 1, info);
-    localStorage.setItem('notes', JSON.stringify(this.notes));
+  deleteNote(indexValue: number) {
+    this.values.forEach((value) => {
+      value.splice(indexValue, 1);
+    });
   }
+
+  // updateNote(
+  //   index: number,
+  //   info: {
+  //     title: string;
+  //     desc: string;
+  //     date: { year: number; month: number; day: number };
+  //   }
+  // ) {
+  //   this.notes.splice(index, 1, info);
+  //   localStorage.setItem('notes', JSON.stringify(this.notes));
+  // }
 }

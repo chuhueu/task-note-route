@@ -8,6 +8,7 @@ import { NoteEditComponent } from './note-edit/note-edit.component';
 import { NoteAddComponent } from './note-add/note-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotesService } from './services/note.service';
+import { TableTestComponent } from './table-test/table-test.component';
 
 const appRoutes: Routes = [
   { path: '', component: TableComponent },
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
     TableComponent,
     NoteEditComponent,
     NoteAddComponent,
+    TableTestComponent,
   ],
   imports: [
     BrowserModule,

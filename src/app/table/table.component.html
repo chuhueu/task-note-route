@@ -5,24 +5,13 @@
 <table class="table">
   <thead class="thread">
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Due On</th>
-      <th>Status</th>
-      <th>Expiring In</th>
+      <th *ngFor="let table of tables">{{ table.title }}</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let note of notes; let i = index">
-      <td class="styleTitle">{{ note.title }}</td>
-      <td>{{ note.desc }}</td>
-      <td>{{ note.date.day }}/{{ note.date.month }}/{{ note.date.year }}</td>
-      <td>
-        <div class="styleOverdue text-center">OverDue</div>
-        <div class="text-center">3 days</div>
-      </td>
-      <td>3 days</td>
+    <tr *ngFor="let value of values[0]; let i = index">
+      <td *ngFor="let col of values; let j = index">{{ values[j][i] }}</td>
       <td>
         <div class="dropdown">
           <button
@@ -38,15 +27,17 @@
             <li>
               <a
                 style="cursor: pointer"
-                data-toggle="modal"
                 data-target="#exampleModalCenter"
+                (click)="onHandleDelete(i)"
                 >Delete</a
               >
+              <!-- data-toggle="modal" -->
             </li>
           </ul>
         </div>
       </td>
-      <div
+      <!--Dialog-->
+      <!-- <div
         class="modal"
         id="exampleModalCenter"
         tabindex="-1"
@@ -82,14 +73,14 @@
                 type="button"
                 class="btn btn-primary"
                 data-dismiss="modal"
-                (click)="onHandleDelete(note.title)"
+                (click)="onHandleDelete(i)"
               >
                 Delete
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </tr>
   </tbody>
 </table>

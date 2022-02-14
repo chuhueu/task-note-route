@@ -1,0 +1,16 @@
+<div class="title">
+  <h3 class="overdue">Overdue</h3>
+  <a routerLink="/add">Add Note</a>
+</div>
+<table class="table">
+  <thead class="thread">
+    <tr>
+      <th *ngFor="let table of tables">{{ table.title }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let value of values[0]; let i = index">
+      <td *ngFor="let col of values; let j = index">{{ values[j][i] }}</td>
+    </tr>
+  </tbody>
+</table>
