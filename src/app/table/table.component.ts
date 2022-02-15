@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NotesService, Table } from '../services/note.service';
+import { NoteService } from '../services/note.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-table',
@@ -8,10 +8,10 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbModalConfig, NgbModal],
 })
 export class TableComponent implements OnInit {
-  tables: Table[];
-  values: any[] = [];
+  @Input() data: any;
+  display: Array<string>;
   constructor(
-    private notesService: NotesService,
+    private noteService: NoteService,
     config: NgbModalConfig,
     private modalService: NgbModal
   ) {
@@ -20,21 +20,17 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tables = this.notesService.tables;
-    //create an array values contain tables.values
-    this.tables.forEach((table) => {
-      this.values.push(table.values);
-    });
-    //console.log(this.values);
+    this.display = this.data[0].values;
+    // this.data[0].values.forEach((row: any, i: any) => {
+    //   this.data.forEach((col: any, j: any) => {
+    //     console.log(this.data[j].values[i]);
+    //   });
+    // });
   }
-
   open(content: any) {
     this.modalService.open(content);
   }
-  onHandleDelete(indexValue: number) {
-    // this.notesService.deleteNote(indexValue);
-    this.values.forEach((value) => {
-      value.splice(indexValue, 1);
-    });
+  onHandleDelete(index: number) {
+    this.noteService.deleteNote(index);
   }
 }
